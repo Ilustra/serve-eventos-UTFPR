@@ -7,7 +7,7 @@ const authMiddleware = require('../middlewares/auth')
 router.use(authMiddleware)
 
 router.get('/', (req, res)=> {
-   return res.send({status: true, Id: req.Id})
+   return res.send({status: true, UsuarioId: req.userId})
 })
 
 module.exports = app => app.use('/auth', router)

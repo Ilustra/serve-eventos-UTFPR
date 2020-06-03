@@ -6,5 +6,5 @@ module.exports = {
     database: 'mysql',
     host: 'localhost',
     dialect: 'mysql',
-    port: 5563
+    port: 3306
   }

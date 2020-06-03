@@ -1,49 +1,59 @@
 'use strict';
 module.exports = {
   up: (queryInterface, DataTypes) => {
-    return queryInterface.createTable('Usuario', {
+    return queryInterface.createTable('Atividade', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      nome: {
+      titulo: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      email: {
+      descricao: {
         allowNull: false,
         type: DataTypes.STRING,
+      },
+      inicio: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },      
-      cpf: {
+      fim: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      valor: {
+        allowNull: false,
+        type: DataTypes.FLOAT,
+      },  
+      cargaHoraria: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      area: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      passaporte: {
+      local: {
         allowNull: false,
         type: DataTypes.STRING,
       },
-      estrangeiro: {
+      evento: {
         allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+        type: DataTypes.INTEGER,
+        references:{model:'Evento', key:'id'},
+        onUpdate: 'CASCADE',
+        onDelete:'CASCADE',
       },
-      password: {
+      tipoAtividade: {
         allowNull: false,
-        type: DataTypes.STRING,
-      },
-      estado: {
-        allowNull: false,
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
-      },
-      perfil: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        select: false,
-        defaultValue: 'PARTICIPANTE'
-      },    
+        type: DataTypes.INTEGER,
+        references:{model:'TipoAtividade', key:'id'},
+        onUpdate: 'CASCADE',
+        onDelete:'CASCADE',
+      },   
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
@@ -56,6 +66,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Usuario');
+    return queryInterface.dropTable('Atividade');
   }
 };

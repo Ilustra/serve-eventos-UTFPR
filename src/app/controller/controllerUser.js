@@ -15,15 +15,18 @@ function generateToken(params ={}){
 
 router.post('/newCountUser',   async (req, res)=>{
     const {Email}= req.body
-    console.log(Email)
-    if (await Usuario.findOne({ where:{Email}}))
-     return res.status(400).send("User already exists")
+
     try{
+        
+    if (await Usuario.findOne({ where:{Email}}))
+    return res.status(400).send("User already exists")
+
         let user = await Usuario.create(req.body)
         user.Password = undefined;
         user.Perfil = undefined;
         user.Token = generateToken({id: user.Id})
         return res.status(200).json(user)
+        
     }catch(e){
         return res.status(400).send(e)
     }
@@ -45,7 +48,7 @@ router.post('/authenticateUser',  async(req, res)=>{
         
     user.Password = undefined;
     user.Token = generateToken({id: user.Id})
-    res.send(user)
+    return res.send(user)
 })
 
 module.exports = app => app.use('/auth',  router)
